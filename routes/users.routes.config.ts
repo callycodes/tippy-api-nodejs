@@ -1,5 +1,7 @@
 import {CommonRoutesConfig} from '../common/common.routes.config';
 import express from 'express';
+import UsersController from '../controllers/users.controller';
+import e from 'express';
 
 export class UsersRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -10,18 +12,22 @@ export class UsersRoutes extends CommonRoutesConfig {
       
       this.app.route('/users')
         .get((req: express.Request, res: express.Response) => {
-          res.status(200).send('List of users');
+          UsersController.getAllUsers(req, res);
         })
         .post((req: express.Request, res: express.Response) => {
-          res.status(200).send('Post to users');
+          UsersController.createUser(req, res);
         });
 
       this.app.route('/users/:userId')
         .all((req: express.Request, res: express.Response, next: express.NextFunction) => {
-          next();
+          if (!req.params.userId) {
+            res.status(401).send('No USER ID');
+          } else {
+            next();
+          }
         })
         .get((req: express.Request, res: express.Response) => {
-          res.status(200).send(`GET requested for id ${req.params.userId}`);
+          UsersController.getUserById(req, res);
         })
         .put((req: express.Request, res: express.Response) => {
           res.status(200).send(`PUT requested for id ${req.params.userId}`);

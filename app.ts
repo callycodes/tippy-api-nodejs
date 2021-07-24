@@ -9,6 +9,8 @@ import {UsersRoutes} from './routes/users.routes.config';
 import debug from 'debug';
 import { TeamsRoutes } from './routes/teams.routes.config';
 
+import mongoose from 'mongoose';
+
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port = 3000;
@@ -42,6 +44,9 @@ app.get('/', (req: express.Request, res: express.Response) => {
     res.status(200).send(runningMessage)
 });
 
+mongoose.connect('mongodb+srv://developer:ZJPdw6W5yJChaKWy@cluster0.lqquy.mongodb.net/tippy?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+debugLog('Mongoose connection started');
+
 server.listen(port, () => {
   routes.forEach((route: CommonRoutesConfig) => {
       debugLog(`Routes configured for ${route.getName()}`);
@@ -49,3 +54,4 @@ server.listen(port, () => {
 
   console.log(runningMessage);
 });
+
