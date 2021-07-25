@@ -1,4 +1,4 @@
-import { UserModel, User } from '../models/user.model'
+import { UserModel, User, PutUser, PatchUser } from '../models/user.model'
 import { CRUD } from '../common/crud.interface';
 
 class UsersService implements CRUD {
@@ -7,8 +7,8 @@ class UsersService implements CRUD {
     return UserModel.find();
   }
 
-  async putById(id: string, data: User): Promise<any> {
-    return UserModel.findByIdAndUpdate(id, data);
+  async putById(id: string, data: PutUser): Promise<any> {
+    return UserModel.findOneAndUpdate({ _id: id }, data);
   }
 
   async readById(id: string): Promise<any> {
@@ -19,8 +19,8 @@ class UsersService implements CRUD {
     return UserModel.findByIdAndDelete(id);
   }
 
-  async patchById(id: string, data: any): Promise<any> {
-    return UserModel.findByIdAndUpdate(id, data);
+  async patchById(id: string, data: PatchUser): Promise<any> {
+    return UserModel.findOneAndUpdate({ _id: id }, data);
   }
 
   async create(data: User): Promise<any> {

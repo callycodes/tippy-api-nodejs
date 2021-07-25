@@ -30,13 +30,13 @@ export class UsersRoutes extends CommonRoutesConfig {
           UsersController.getUserById(req, res);
         })
         .put((req: express.Request, res: express.Response) => {
-          res.status(200).send(`PUT requested for id ${req.params.userId}`);
+          UsersController.putUserById(req, res);
         })
         .patch((req: express.Request, res: express.Response) => {
-          res.status(200).send(`PATCH requested for id ${req.params.userId}`);
+          UsersController.patchUserById(req, res);
         })
         .delete((req: express.Request, res: express.Response) => {
-          res.status(200).send(`DELETE requested for id ${req.params.userId}`);
+          UsersController.deleteUserById(req, res);
         });
       return this.app;
   }

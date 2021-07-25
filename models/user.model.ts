@@ -8,6 +8,12 @@ interface User {
   display_name?: string
 }
 
+interface PutUser extends User {
+  id: string
+}
+
+interface PatchUser extends Partial<PutUser> {};
+
 const schema = new Schema<User>({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
@@ -18,4 +24,4 @@ const schema = new Schema<User>({
 
 const UserModel = model<User>('User', schema);
 
-export { UserModel, User };
+export { UserModel, User, PutUser, PatchUser };

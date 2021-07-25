@@ -1,8 +1,6 @@
 import express from "express";
 import UsersService from '../services/users.service';
-import mongoose, { model } from "mongoose";
-import { User, UserModel } from '../models/user.model';
-import debug from 'debug';
+import { Response, ResponseType } from '../common/response.interface';
 
 class UsersController {
 
@@ -28,9 +26,44 @@ class UsersController {
   async getAllUsers(req: express.Request, res: express.Response) {
     try {
       const users = await UsersService.list();
-      res.status(201).send(users);
+      const response: Response = { type: ResponseType.Success, data: users };
+      res.status(201).send(response);
     } catch {
-      res.status(401).send('Error retrieving users');
+      const response: Response = { type: ResponseType.Error, message: "Error retrieving users" };
+      res.status(401).send(response);
+    }
+  }
+
+  async putUserById(req: express.Request, res: express.Response) {
+    try {
+      await UsersService.putById(req.params.userId, req.body);
+      const response: Response = { type: ResponseType.Success, message: "User updated" };
+      res.status(201).send(response);
+    } catch {
+      const response: Response = { type: ResponseType.Error, message: "Error updating" };
+      res.status(401).send(response);
+    }
+  }
+
+  async patchUserById(req: express.Request, res: express.Response) {
+    try {
+      await UsersService.patchById(req.params.userId, req.body)
+      const response: Response = { type: ResponseType.Success, message: "User patched" };
+      res.status(201).send(response);
+    } catch {
+      const response: Response = { type: ResponseType.Error, message: "Error patching" };
+      res.status(401).send(response);
+    }
+  }
+
+  async deleteUserById(req: express.Request, res: express.Response) {
+    try {
+      await UsersService.deleteById(req.params.userId)
+      const response: Response = { type: ResponseType.Success, message: "User deleted" };
+      res.status(201).send(response);
+    } catch {
+      const response: Response = { type: ResponseType.Error, message: "Error deleting" };
+      res.status(401).send(response);
     }
   }
   
