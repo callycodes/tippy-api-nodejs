@@ -9,7 +9,7 @@ interface User {
 }
 
 interface PutUser extends User {
-  id: string
+  _id: string
 }
 
 interface PatchUser extends Partial<PutUser> {};
