@@ -20,7 +20,7 @@ class UsersService implements CRUD {
   }
 
   async readByEmailWithPassword(email: string): Promise<any> {
-    return UserModel.findOne({ email: email }).select('_id email +password_hash').exec();
+    return UserModel.findOne({ email: email }).select('+password_hash').exec();
   }
 
   async deleteById(id: string): Promise<any> {

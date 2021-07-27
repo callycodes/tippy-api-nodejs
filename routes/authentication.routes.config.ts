@@ -24,10 +24,10 @@ export class AuthenticationRoutes extends CommonRoutesConfig {
           AuthenticationController.createToken(req, res);
         });
 
-        this.app.route('/auth/validate')
+        /*this.app.route('/auth/validate')
         .post((req: express.Request, res: express.Response) => {
           AuthenticationController.validateToken(req, res);
-        });
+        });*/
 
       this.app.route('/auth/verify')
         .get((req: express.Request, res: express.Response) => {

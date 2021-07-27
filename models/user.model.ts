@@ -18,7 +18,7 @@ const schema = new Schema<User>({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   email: { type: String, required: true },
-  password_hash: { type: String, required: true },
+  password_hash: { type: String, required: true, select: false },
   display_name: String,
 });
 
