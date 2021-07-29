@@ -19,13 +19,10 @@ class QRConfigurationController {
   async generateQRImage(req:express.Request, res: express.Response) {
     try {
       const qr_config = await QRConfigurationService.readById(req.params.id);
-      console.log(qr_config)
       const qr_data = await axios.post("http:\/\/127.0.0.1:5000/generate", qr_config);
-      console.log('Found data:');
       res.status(201).send(qr_data.data);
-    } catch (error) {
-
-      res.status(401).send(error);
+    } catch {
+      res.status(401).send();
     }
   }
 
@@ -35,6 +32,17 @@ class QRConfigurationController {
       res.status(201).send(qr_config.toJSON());
     } catch {
       res.status(401).send('No Configuration');
+    }
+  }
+
+  async getAllQRConfigurations(req: express.Request, res: express.Response) {
+    try {
+      const qr_configs = await QRConfigurationService.list();
+      const response: Response = { type: ResponseType.Success, data: qr_configs };
+      res.status(201).send(response);
+    } catch {
+      const response: Response = { type: ResponseType.Error, message: "Error retrieving configurations" };
+      res.status(401).send(response);
     }
   }
 

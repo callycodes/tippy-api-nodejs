@@ -11,6 +11,9 @@ export class QRConfigurationRoutes extends CommonRoutesConfig {
     configureRoutes() {
       
       this.app.route('/qr/')
+      .get((req: express.Request, res: express.Response) => {
+        QRConfigurationController.getAllQRConfigurations(req, res);
+      })
         .post((req: express.Request, res: express.Response) => {
           QRConfigurationController.createQRConfiguration(req, res);
         });

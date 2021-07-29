@@ -51,7 +51,12 @@ app.get('/', (req: express.Request, res: express.Response) => {
     res.status(200).send(runningMessage)
 });
 
-mongoose.connect('mongodb+srv://developer:ZJPdw6W5yJChaKWy@cluster0.lqquy.mongodb.net/tippy?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+let mongoose_connection = process.env.MONGOOSE_DB as string;
+if (process.env.NODE_ENV == "test") {
+    mongoose_connection = process.env.MONGOOSE_TEST_DB as string;
+}
+
+mongoose.connect(mongoose_connection, {useNewUrlParser: true, useUnifiedTopology: true});
 debugLog('Mongoose connection started');
 
 server.listen(port, () => {
@@ -62,3 +67,4 @@ server.listen(port, () => {
   console.log(runningMessage);
 });
 
+module.exports = app;
