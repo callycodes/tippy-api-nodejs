@@ -14,6 +14,7 @@ import { CommonRoutesConfig } from './common/common.routes.config';
 import { UsersRoutes } from './routes/users.routes.config';
 import { TeamsRoutes } from './routes/teams.routes.config';
 import { AuthenticationRoutes } from './routes/authentication.routes.config';
+import { QRConfigurationRoutes } from './routes/qrconfiguration.routes.config';
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
@@ -42,6 +43,7 @@ app.use(expressWinston.logger(loggerOptions));
 routes.push(new UsersRoutes(app));
 routes.push(new TeamsRoutes(app));
 routes.push(new AuthenticationRoutes(app));
+routes.push(new QRConfigurationRoutes(app));
 
 const runningMessage = `Server running at http://localhost:${port}`;
 

@@ -3,6 +3,7 @@ import UsersService from '../services/users.service';
 import { Response, ResponseType } from '../common/response.interface';
 import authenticationService from "../services/authentication.service";
 import argon2 from 'argon2';
+import usersService from "../services/users.service";
 
 class AuthenticationController {
 
@@ -60,9 +61,10 @@ class AuthenticationController {
       const authorization = req.headers.authorization.split(" ");
       const validation = await authenticationService.validateToken(authorization[1]);
       const token = await authenticationService.createToken(validation.id, validation.email);
-      res.status(201).send({ data: { token }});
+      const user = await usersService.readByEmail(validation.email);
+      res.status(201).send({ data: { token, user }});
     } catch {
-      res.status(403).send({ data: { errors: "Error here"}});
+      res.status(403).send({ data: { errors: ["Error during token validation"]}});
     }
   }
 
