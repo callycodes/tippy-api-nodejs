@@ -36,7 +36,9 @@ const schema = new Schema<TextStreamReader>({
   qr_inner_eye_colour: { type: String, default: "FFFFFF" },
   qr_outer_eye_colour: { type: String, default: "FFFFFF" },
   bg_colour: { type: String, default: "000000" },
-  created_on: { type: Date, required: true}
+  created_on: { type: Date, default: function() {
+    return Date.now();
+  }}
 });
 
 const QRConfigurationModel = model<QRConfiguration>('QRConfiguration', schema);

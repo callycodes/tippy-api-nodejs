@@ -9,7 +9,10 @@ class QRConfigurationController {
 
   async createQRConfiguration(req: express.Request, res: express.Response) {
     try {
-      const qr_config = await QRConfigurationService.create(req.body);
+      console.log('got save request')
+      console.log(req.body.data);
+      let configuration: QRConfiguration = req.body.data;
+      const qr_config = await QRConfigurationService.create(configuration);
       res.status(201).send({ id: qr_config._id });
     } catch (error) {
         res.status(401).send(error);
