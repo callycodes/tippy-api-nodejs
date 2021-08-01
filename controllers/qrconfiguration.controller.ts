@@ -16,12 +16,33 @@ class QRConfigurationController {
     }
   }
 
+  async getRandomColours(req: express.Request, res: express.Response) {
+    try {
+      console.log('random geting')
+      const resp = await axios.post("http://colormind.io/api/", { model: 'default'});
+      res.status(201).send({data: resp.data.result})
+    } catch {
+      res.status(401).send();
+    }
+  }
+
   async generateQRImage(req:express.Request, res: express.Response) {
     try {
       const qr_config = await QRConfigurationService.readById(req.params.id);
       const qr_data = await axios.post("http:\/\/127.0.0.1:5000/generate", qr_config);
       res.status(201).send(qr_data.data);
     } catch {
+      res.status(401).send();
+    }
+  }
+
+  async previewQRImage(req:express.Request, res: express.Response) {
+    try {
+      console.log(req.body)
+      const qr_data = await axios.post("http:\/\/127.0.0.1:5000/generate", req.body.data);
+      res.status(201).send(qr_data.data);
+    } catch {
+      console.log('fail')
       res.status(401).send();
     }
   }
@@ -48,7 +69,7 @@ class QRConfigurationController {
 
   async getAllQRConfigurationByOwnerId(req: express.Request, res: express.Response) {
     try {
-      const qr_configs = await QRConfigurationService.readByOwnerId(req.params.owner_id);
+      const qr_configs = await QRConfigurationService.readByOwnerId(req.params.ownerId);
       const response: Response = { type: ResponseType.Success, data: qr_configs };
       res.status(201).send(response);
     } catch {
