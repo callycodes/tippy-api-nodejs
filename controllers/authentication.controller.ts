@@ -38,7 +38,7 @@ class AuthenticationController {
         }
       }
     } catch {
-      const response: Response = { type: ResponseType.Error, message: "Incorrect user credentials" };
+      const response: Response = { type: ResponseType.Error, message: "Error connecting to the database" };
       res.status(401).send(response);
     }
   }
