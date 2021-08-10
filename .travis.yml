@@ -4,6 +4,8 @@ node_js:
 npm:
   - 6
 
+dist: focal
+
 before_install:
   - sudo apt-get update
   - sudo apt-get install libc6
