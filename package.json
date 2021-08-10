@@ -21,6 +21,8 @@
     "express-winston": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.3",
+    "node-addon-api": "^4.0.0",
+    "node-gyp": "^8.1.0",
     "stripe": "^8.167.0",
     "winston": "^3.3.3"
   },
