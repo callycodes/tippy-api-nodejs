@@ -2,5 +2,8 @@ language: node_js
 node_js:
   - 12
 
+services:
+  - docker
+
 before_install:
-- npm install argon2 --ignore-scripts
+  - npm install argon2 --ignore-scripts
