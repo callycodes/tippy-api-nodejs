@@ -4,8 +4,9 @@ node_js:
 npm:
   - 6
 
-after_install:
-  - sudo yum install glibc-devel
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install libc6
 #services:
 #  - docker
 
