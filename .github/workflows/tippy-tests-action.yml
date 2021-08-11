@@ -22,12 +22,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Check current directory
-        run: ls -la
-
-      - name: Install packages
-        run: npm install
-
       - name: NPM CI
         run: npm ci
       
@@ -35,4 +29,6 @@ jobs:
         run: npm run build --if-present
 
       - name: Run tests
-        run: npm test
+        run: npm run test
+        env:
+          MONGOOSE_TEST_DB: mongodb+srv://developer:ZJPdw6W5yJChaKWy@cluster0.lqquy.mongodb.net/tippy_test?retryWrites=true&w=majority
