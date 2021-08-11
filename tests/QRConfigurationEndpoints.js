@@ -22,7 +22,7 @@ describe('Github Actions Test', () => {
   })
 })
 
-describe.skip('QRConfigurations', () => {
+describe('QRConfigurations', () => {
     beforeEach((done) => { //Before each test we empty the database
         QRConfigurationModel.deleteMany({}, (err) => {
            done();
