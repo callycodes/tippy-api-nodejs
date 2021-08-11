@@ -52,10 +52,12 @@ describe('QRConfigurations', () => {
   describe('/POST QRConfigurations', () => {
     it('it should create a new QRConfiguration', (done) => {
       let data = {
-        owner_id: "ownerid",
-        nickname: "nickname",
-        created_on: Date.now(),
-        owner_type: "user"
+        data: {
+          owner_id: "ownerid",
+          nickname: "nickname",
+          created_on: Date.now(),
+          owner_type: "user"
+        }
       }
       chai.request(server)
           .post('/qr')
