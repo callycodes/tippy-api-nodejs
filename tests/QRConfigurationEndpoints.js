@@ -7,6 +7,7 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../app.ts');
 let should = chai.should();
+var expect = chai.expect;
 
 chai.use(chaiHttp);
 
@@ -41,6 +42,7 @@ describe('QRConfigurations', () => {
                   res.body.type.should.be.eql('success');
                   res.body.data.should.be.a('array')
                   res.body.data.length.should.be.eql(0);
+                  
               done();
             });
       });
@@ -63,10 +65,11 @@ describe('QRConfigurations', () => {
           .post('/qr')
           .send(data)
           .end((err, res) => {
-                res.should.have.status(201);
-                res.body.type.should.be.eql('success');
-                res.body.data.should.be.a('array')
-                res.body.data.length.should.be.eql(0);
+                expect(res).should.have.status(201);
+                expect(res.body.type).should.be.eql('success');
+                expect(res.body.data).should.be.a('array')
+                expect(res.body.data).length.should.be.eql(0);
+              
             done();
           });
     });
