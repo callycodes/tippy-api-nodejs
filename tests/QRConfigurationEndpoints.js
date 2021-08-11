@@ -65,8 +65,8 @@ describe('QRConfigurations', () => {
           .post('/qr')
           .send(data)
           .end((err, res) => {
-                expect(res).should.have.status(201);
-                expect(res).body.type.should.be.eql('success');
+                expect(res).to.have.status(201);
+                expect(res).body.type.to.be.eql('success');
                 //expect(res.body.data).should.be.a('array')
                 //expect(res.body.data).length.should.be.eql(0);
               
