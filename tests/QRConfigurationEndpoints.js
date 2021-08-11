@@ -58,7 +58,8 @@ describe('QRConfigurations', () => {
         owner_type: "user"
       }
       chai.request(server)
-          .post('/qr', data)
+          .post('/qr')
+          .send(data)
           .end((err, res) => {
                 res.should.have.status(201);
                 res.body.type.should.be.eql('success');
